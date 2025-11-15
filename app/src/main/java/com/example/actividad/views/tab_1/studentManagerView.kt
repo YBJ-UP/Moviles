@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.actividad.NavManager.ROUTES
+import com.example.actividad.NavManager.routes.ROUTES
 
 @Composable
 fun studentManagerView(innerPaddingValues: PaddingValues, navController: NavController){

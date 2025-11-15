@@ -9,23 +9,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.example.actividad.NavManager.routes.TabROUTES
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun tab(){
     val navController = rememberNavController()
-    val startingRoute = ROUTES.studentManager
+    val startingRoute = TabROUTES.Estudiantes
     var selectedRoute by rememberSaveable { mutableIntStateOf(startingRoute.ordinal) }
 
     Scaffold(modifier = Modifier) { contentPadding ->
         PrimaryTabRow(selectedTabIndex = selectedRoute, modifier = Modifier.padding(contentPadding)) {
-            ROUTES.entries.forEachIndexed { index, route ->
+            TabROUTES.entries.forEachIndexed { index, route ->
                 Tab(selected = selectedRoute == index,
                     onClick = {
                         navController.navigate(route.name)
