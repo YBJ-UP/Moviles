@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.actividad.NavManager.navController
+import com.example.actividad.NavManager.tab
 import com.example.actividad.ui.theme.ActividadTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,15 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ActividadTheme {
-                Scaffold(
-                    topBar = {
-                        CenterAlignedTopAppBar(
-                            title = { Text("static element") }
-                        )
-                    }
-                ) {
-                    navController(it)
-                }
+                tab()
             }
         }
     }
