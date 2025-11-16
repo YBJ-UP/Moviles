@@ -1,6 +1,9 @@
 package com.example.actividad.NavManager
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
@@ -17,13 +20,13 @@ import com.example.actividad.NavManager.routes.TabROUTES
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun tab(){
+fun tab(innerPaddingValues: PaddingValues){
     val navController = rememberNavController()
     val startingRoute = TabROUTES.Estudiantes
     var selectedRoute by rememberSaveable { mutableIntStateOf(startingRoute.ordinal) }
 
-    Scaffold(modifier = Modifier) { contentPadding ->
-        PrimaryTabRow(selectedTabIndex = selectedRoute, modifier = Modifier.padding(contentPadding)) {
+    Scaffold(modifier = Modifier.padding(innerPaddingValues)) { contentPadding ->
+        PrimaryTabRow(selectedTabIndex = selectedRoute) {
             TabROUTES.entries.forEachIndexed { index, route ->
                 Tab(selected = selectedRoute == index,
                     onClick = {

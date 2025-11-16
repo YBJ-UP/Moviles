@@ -24,7 +24,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ActividadTheme {
-                tab()
+                Scaffold {
+                    tab(it)
+                }
             }
         }
     }
