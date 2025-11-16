@@ -10,7 +10,6 @@ import com.example.actividad.NavManager.routes.TabROUTES
 import com.example.actividad.views.tab_1.newStudentView
 import com.example.actividad.views.tab_1.studentManagerView
 import com.example.actividad.views.tab_2.averageGrades
-import com.example.actividad.views.tab_2.lowestGradesView
 import com.example.actividad.views.tab_2.topThreeView
 
 @Composable
