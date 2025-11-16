@@ -10,6 +10,8 @@ import com.example.actividad.NavManager.routes.TabROUTES
 import com.example.actividad.views.tab_1.newStudentView
 import com.example.actividad.views.tab_1.studentManagerView
 import com.example.actividad.views.tab_2.averageGrades
+import com.example.actividad.views.tab_2.lowestGradesView
+import com.example.actividad.views.tab_2.topThreeView
 
 @Composable
 fun navController(innerPaddingValues: PaddingValues, NavController: NavHostController, startingRoute: TabROUTES){
@@ -17,6 +19,7 @@ fun navController(innerPaddingValues: PaddingValues, NavController: NavHostContr
         navController = NavController,
         startDestination = startingRoute.name
     ){
+        //tab 1
          composable(ROUTES.studentManager){
             studentManagerView(innerPaddingValues, NavController)
         }
@@ -24,8 +27,15 @@ fun navController(innerPaddingValues: PaddingValues, NavController: NavHostContr
             newStudentView(innerPaddingValues, NavController)
         }
 
+        //tab 2
         composable(ROUTES.averageGrades) {
             averageGrades(innerPaddingValues, NavController)
+        }
+        composable(ROUTES.lowestGrades) {
+            lowestGradesView(innerPaddingValues, NavController)
+        }
+        composable(ROUTES.topThreePerGroup){
+            topThreeView(innerPaddingValues, NavController)
         }
     }
 

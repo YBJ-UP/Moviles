@@ -1,4 +1,4 @@
-package com.example.actividad.views.tab_1
+package com.example.actividad.views.tab_2
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
-fun newStudentView(innerPaddingValues: PaddingValues, navController: NavController){
+fun lowestGradesView(innerPaddingValues: PaddingValues, navController: NavController){
     Column(
         modifier = Modifier
             .padding(innerPaddingValues)
@@ -21,14 +21,10 @@ fun newStudentView(innerPaddingValues: PaddingValues, navController: NavControll
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Holaaaasdbs<jfbsdbh")
-
-        Button( onClick = {} ) {
-            Text("Añadir estudiante (no hace nd)")
-        }
+        Text("sjtajaje chamacos mensos")
 
         Button( onClick = { navController.popBackStack() } ) {
-            Text("Cancelar")
+            Text("Regresar")
         }
     }
 }
