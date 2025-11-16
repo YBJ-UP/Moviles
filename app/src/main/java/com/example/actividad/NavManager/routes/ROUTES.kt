@@ -5,6 +5,5 @@ object ROUTES {
     val newStudent = "newStudent"
 
     val averageGrades = "Calificaciones"
-    val lowestGrades = "lowestGrades"
     val topThreePerGroup = "topThreePerGroup"
 }

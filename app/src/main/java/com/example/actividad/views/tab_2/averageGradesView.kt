@@ -22,11 +22,9 @@ fun averageGrades(innerPaddingValues: PaddingValues, navController: NavControlle
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("jkankjfsd")
+        Text("Acá va el promedio")
 
-        Button( onClick = { navController.navigate(ROUTES.lowestGrades) } ) {
-            Text("Alumnos con mayor resago")
-        }
+        Text("Acá van los q tienen más resago")
 
         Button( onClick = { navController.navigate(ROUTES.topThreePerGroup) } ) {
             Text("Alumnos con calificación más alta")

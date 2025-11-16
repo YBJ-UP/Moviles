@@ -31,9 +31,6 @@ fun navController(innerPaddingValues: PaddingValues, NavController: NavHostContr
         composable(ROUTES.averageGrades) {
             averageGrades(innerPaddingValues, NavController)
         }
-        composable(ROUTES.lowestGrades) {
-            lowestGradesView(innerPaddingValues, NavController)
-        }
         composable(ROUTES.topThreePerGroup){
             topThreeView(innerPaddingValues, NavController)
         }
