@@ -17,5 +17,5 @@ data class Student(
     @ColumnInfo(name = "grupo")
     val grupo: Char,
     @ColumnInfo(name = "promedio")
-    val puntaje: Long
+    val puntaje: Float
 )

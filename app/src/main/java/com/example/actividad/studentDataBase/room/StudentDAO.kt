@@ -12,10 +12,16 @@ import kotlinx.coroutines.flow.Flow
 interface StudentDAO {
 
     @Query("SELECT * FROM estudiantes")
-    fun getAllStudent(): Flow<List<Student>>
+    fun getAllStudents(): Flow<List<Student>>
+
+    @Query("SELECT promedio FROM estudiantes")
+    fun getAllGrades(): Flow<List<Float>>
 
     @Query("SELECT * FROM estudiantes WHERE grupo = :grupo")
-    fun getByGroup(grupo: Char): Flow<Student>
+    fun getByGroup(grupo: Char): Flow<List<Student>>
+
+    @Query("SELECT * FROM estudiantes WHERE id = :id")
+    fun getStudentById(id: Long): Flow<Student>
 
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun updateStudent(student: Student)
