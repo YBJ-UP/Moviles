@@ -22,13 +22,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.actividad.NavManager.routes.ROUTES
 import com.example.actividad.studentDataBase.model.Student
+import com.example.actividad.viewModels.StudentViewModel.StudentList
+import com.example.actividad.viewModels.StudentViewModel.StudentListViewModel
 
 
 fun getSampleStudents(): List<Student> {
@@ -46,8 +51,11 @@ fun getSampleStudents(): List<Student> {
 }
 
 @Composable
-fun studentManagerView(innerPaddingValues: PaddingValues, navController: NavController) {
-    val studentList = getSampleStudents()
+fun studentManagerView(innerPaddingValues: PaddingValues,
+                       navController: NavController,
+                       viewModel: StudentListViewModel = hiltViewModel()
+) {
+   val state by viewModel.state.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -76,7 +84,7 @@ fun studentManagerView(innerPaddingValues: PaddingValues, navController: NavCont
                 .weight(1f),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(studentList) { student ->
+            items(state.students) { student ->
                 StudentCard(student = student)
             }
         }
