@@ -61,6 +61,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
 
+    implementation(libs.androidx.compose.material.icons.extended)
+
     implementation(libs.androidx.room.runtime)
     implementation(libs.symbol.processing.api)
     ksp(libs.androidx.room.compiler)
@@ -68,4 +70,5 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
 }
