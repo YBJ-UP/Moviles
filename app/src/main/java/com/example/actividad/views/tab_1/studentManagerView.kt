@@ -13,11 +13,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -34,12 +37,14 @@ import com.example.actividad.NavManager.routes.ROUTES
 import com.example.actividad.studentDataBase.model.Student
 import com.example.actividad.viewModels.StudentViewModel.StudentListViewModel
 
+
 @Composable
-fun studentManagerView(innerPaddingValues: PaddingValues,
-                       navController: NavController,
-                       viewModel: StudentListViewModel = hiltViewModel()
+fun studentManagerView(
+    innerPaddingValues: PaddingValues,
+    navController: NavController,
+    viewModel: StudentListViewModel = hiltViewModel()
 ) {
-   val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -69,18 +74,29 @@ fun studentManagerView(innerPaddingValues: PaddingValues,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(state.students) { student ->
-                StudentCard(student = student)
+                StudentCard(
+                    student = student,
+                    onDeleteClick = {
+                        viewModel.deleteStudent(student)
+                    },
+                    onEditClick = {
+                        navController.navigate("${ROUTES.newStudent}?id=${student.id}")
+                        println("Editar alumno: ${student.id}")
+                    }
+                )
             }
         }
     }
 }
 
-
 @Composable
-fun StudentCard(student: Student) {
+fun StudentCard(
+    student: Student,
+    onDeleteClick: () -> Unit,
+    onEditClick: () -> Unit
+) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
@@ -88,30 +104,46 @@ fun StudentCard(student: Student) {
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
-                Text(
-                    text = "${student.nombre} ${student.apellidos}",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.weight(1f)
-                )
-                Text(
-                    text = "ID: ${student.id}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "${student.nombre} ${student.apellidos}",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "ID: ${student.id}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Row {
+                    IconButton(onClick = onEditClick) {
+                        Icon(
+                            imageVector = Icons.Filled.Edit,
+                            contentDescription = "Editar",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    IconButton(onClick = onDeleteClick) {
+                        Icon(
+                            imageVector = Icons.Filled.Delete,
+                            contentDescription = "Eliminar",
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(8.dp))
             HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
             Spacer(modifier = Modifier.height(8.dp))
 
+            // --- Fila Inferior: Detalles ---
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween

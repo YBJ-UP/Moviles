@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.actividad.studentDataBase.model.Student
 import com.example.actividad.studentDataBase.repository.studentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -31,6 +32,16 @@ class StudentListViewModel @Inject constructor(private val repository: studentRe
             initialValue = StudentList()
         )
 
+
+    fun getStudentById(id: Long): Flow<Student> {
+        return repository.getById(id)
+    }
+
+    fun updateStudent(student: Student) {
+        viewModelScope.launch {
+            repository.updateStudent(student)
+        }
+    }
     fun addStudent(student: Student) {
         viewModelScope.launch {
             repository.addStudent(student)
@@ -42,4 +53,5 @@ class StudentListViewModel @Inject constructor(private val repository: studentRe
             repository.deleteStudent(student)
         }
     }
+
 }
