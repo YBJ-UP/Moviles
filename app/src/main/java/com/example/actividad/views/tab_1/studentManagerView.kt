@@ -32,23 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.actividad.NavManager.routes.ROUTES
 import com.example.actividad.studentDataBase.model.Student
-import com.example.actividad.viewModels.StudentViewModel.StudentList
 import com.example.actividad.viewModels.StudentViewModel.StudentListViewModel
-
-
-fun getSampleStudents(): List<Student> {
-    return listOf(
-
-        Student(1, "Ana", "García Pérez", 1, 'A', 8.0),
-        Student(2, "Luis", "Martínez López", 3, 'B', 8.0),
-        Student(3, "Sofía", "Ramírez Torres", 2, 'C', 7.0),
-        Student(4, "Carlos", "Hernández Diaz", 1, 'A', 9.0),
-        Student(5, "Elena", "Vázquez Ruiz", 3, 'A', 8.0),
-        Student(6, "Jorge", "Sánchez Cano", 4, 'D', 7.0),
-        Student(6, "Jorge", "Sánchez Cano", 4, 'D', 7.0),
-        Student(6, "Jorge", "Sánchez Cano", 4, 'D', 7.0)
-    )
-}
 
 @Composable
 fun studentManagerView(innerPaddingValues: PaddingValues,
