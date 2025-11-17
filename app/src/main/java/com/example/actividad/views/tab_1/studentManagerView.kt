@@ -40,6 +40,8 @@ fun getSampleStudents(): List<Student> {
         Student(4, "Carlos", "Hernández Diaz", 1, 'A', 9.0),
         Student(5, "Elena", "Vázquez Ruiz", 3, 'A', 8.0),
         Student(6, "Jorge", "Sánchez Cano", 4, 'D', 7.0),
+        Student(6, "Jorge", "Sánchez Cano", 4, 'D', 7.0),
+        Student(6, "Jorge", "Sánchez Cano", 4, 'D', 7.0)
     )
 }
 
@@ -58,7 +60,7 @@ fun studentManagerView(innerPaddingValues: PaddingValues, navController: NavCont
             onClick = { navController.navigate(ROUTES.newStudent) },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp),
+                .padding(vertical = 25.dp),
         ) {
             Icon(
                 imageVector = Icons.Filled.Add,
@@ -69,7 +71,9 @@ fun studentManagerView(innerPaddingValues: PaddingValues, navController: NavCont
         }
 
         LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(studentList) { student ->
@@ -98,14 +102,13 @@ fun StudentCard(student: Student) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Nombre Completo
+
                 Text(
                     text = "${student.nombre} ${student.apellidos}",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.weight(1f)
                 )
-                // ID
                 Text(
                     text = "ID: ${student.id}",
                     style = MaterialTheme.typography.bodyMedium,
