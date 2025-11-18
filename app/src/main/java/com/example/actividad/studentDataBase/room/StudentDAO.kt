@@ -17,8 +17,20 @@ interface StudentDAO {
     @Query("SELECT promedio FROM estudiantes")
     fun getAllGrades(): Flow<List<Float>>
 
-    @Query("SELECT * FROM estudiantes WHERE grupo = :grupo")
-    fun getByGroup(grupo: Char): Flow<List<Student>>
+    @Query("""
+        SELECT * FROM (
+            SELECT *,
+            ROW_NUMBER() OVER (
+                PARTITION BY grupo
+                ORDER BY promedio DESC
+            ) AS n
+            FROM estudiantes
+        ) WHERE n <= 3
+    """)
+    fun getTopThreePerGroup(): Flow<List<Student>>
+
+    @Query("SELECT * FROM estudiantes ORDER BY promedio ASC LIMIT 3")
+    fun getLowestTenGrades(): Flow<List<Student>>
 
     @Query("SELECT * FROM estudiantes WHERE id = :id")
     fun getStudentById(id: Long): Flow<Student>

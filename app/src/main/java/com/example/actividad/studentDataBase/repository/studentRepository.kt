@@ -10,10 +10,19 @@ import javax.inject.Inject
 
 class studentRepository @Inject constructor(private val dao: StudentDAO) {
     fun getAll(): Flow<List<Student>> = dao.getAllStudents().flowOn(Dispatchers.IO).conflate()
+
     fun getAllGrades(): Flow<List<Float>> = dao.getAllGrades().flowOn(Dispatchers.IO).conflate()
-    fun getByGroup(group: Char): Flow<List<Student>> = dao.getByGroup(group).flowOn(Dispatchers.IO).conflate()
+
     fun getById(id: Long): Flow<Student> = dao.getStudentById(id).flowOn(Dispatchers.IO).conflate()
+
+    fun getTopThreePerGroup(): Flow<List<Student>> = dao.getTopThreePerGroup().flowOn(Dispatchers.IO).conflate()
+
+    fun getLowestGrades(): Flow<List<Student>> = dao.getLowestTenGrades().flowOn(Dispatchers.IO).conflate()
+
     suspend fun addStudent(student: Student) = dao.addStudent(student)
+
     suspend fun updateStudent(student: Student) = dao.updateStudent(student)
+
     suspend fun deleteStudent(student: Student) = dao.deleteStudent(student)
+
 }
