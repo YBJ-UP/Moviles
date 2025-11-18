@@ -1,6 +1,7 @@
 package com.example.actividad.viewModel.tab_2
 
 import androidx.lifecycle.ViewModel
+import com.example.actividad.studentDataBase.model.Student
 import com.example.actividad.studentDataBase.repository.studentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -21,4 +22,6 @@ class averageGradesViewModel @Inject constructor(private val repository: student
             0f
         }
     }
+
+    val lowestGrades: Flow<List<Student>> = repository.getLowestGrades()
 }

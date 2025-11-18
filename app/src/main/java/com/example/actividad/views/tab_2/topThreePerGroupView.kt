@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -38,7 +39,18 @@ fun topThreeView(
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Calificaciones más altas por grupo:")
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = "Calificaciones más altas por grupo:",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
         LazyColumn {
             highestGrades.forEach { (grupo, estudiantes) ->
                 item {
@@ -53,7 +65,8 @@ fun topThreeView(
                         ) {
                             Text(
                                 text = "Grupo $grupo",
-                                fontWeight = FontWeight.ExtraBold
+                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.titleLarge
                             )
 
                             estudiantes.forEach { estudiante ->

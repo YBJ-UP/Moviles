@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -33,14 +34,16 @@ fun averageGrades(
     viewModel: averageGradesViewModel = hiltViewModel()
 ){
     val avgGrade: Float = viewModel.averageGrade.collectAsState(initial = 0f).value
+    val lowestGrades = viewModel.lowestGrades.collectAsState(initial = emptyList()).value
 
     Column(
         modifier = Modifier
             .padding(innerPaddingValues)
             .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Spacer(modifier = Modifier.height(10.dp))
 
         Card {
             Column(
@@ -50,7 +53,7 @@ fun averageGrades(
                 if (avgGrade > 0f){
                     Text("La calificación promedio de los alumnos es:")
                     Text(
-                        text = "${avgGrade}",
+                        text = "$avgGrade",
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleLarge
                     )
@@ -68,7 +71,34 @@ fun averageGrades(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Text("Acá van los q tienen más resago")
+        Card {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 20.dp, vertical = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Alumnos con mayor rezago:",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+                lowestGrades.forEach { estudiante ->
+                    Row {
+                        Text(
+                            text = "${estudiante.grado}° ${estudiante.grupo}.- ",
+                            fontWeight = FontWeight.Medium
+                        )
+                        Text("${estudiante.nombre} ${estudiante.apellidos} – ")
+                        Text(
+                            text = "${estudiante.puntaje}",
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
 
         Button( onClick = { navController.navigate(ROUTES.topThreePerGroup) } ) {
             Text("Alumnos con calificación más alta")
